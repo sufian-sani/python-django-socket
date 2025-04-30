@@ -1,0 +1,77 @@
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.cache/
+
+**/node_modules
+**/node_modules*
+
+# === Python ===
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.Python
+env/
+venv/
+ENV/
+ENV*/
+env*/
+venv*/
+*.pyo
+
+# === OS Specific ===
+.DS_Store
+Thumbs.db
+
+# === Environment files (nested too) ===
+**/.env
+**/.env.*
+**/env
+**/env*
+env*/
+**/env*/
+
+
+# Ignore all virtual environments at any level named env*
+**/env*/
+**/env*/**
+
+# Python cache and build files
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+**/*.pyd
+**/*.egg-info/
+**/*.log
+
+# Ignore Jupyter checkpoints
+**/.ipynb_checkpoints/
+
+# Ignore build folders
+**/build/
+**/dist/
+
+# Common virtual environment folder names
+**/.venv/
+**/venv/
+**/ENV/
+**/env/
+
+# Environment variable files
+**/.env
+**/.env.*
+
+# Ignore IDE/editor folders
+**/.vscode/
+**/.idea/
+
+# OS-specific files
+**/.DS_Store
+**/Thumbs.db

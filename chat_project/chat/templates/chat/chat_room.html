@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with {{ other_user.username }}</title>
+</head>
+<body>
+    <h2>Chatting with {{ other_user.username }}</h2>
+
+    <div id="chat-log" style="height: 300px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
+    </div>
+
+    <input id="chat-message-input" type="text" size="100">
+    <button id="chat-message-submit">Send</button>
+
+    <script>
+        const username = "{{ other_user.username }}";
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/' + username + '/'
+        );
+        
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const chatLog = document.querySelector('#chat-log');
+            chatLog.innerHTML += '<p><b>' + data.username + ':</b> ' + data.message + '</p>';
+            chatLog.scrollTop = chatLog.scrollHeight;
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+
+            console.log('------------**************-------------',chatSocket);
+            
+        };
+        
+    </script>
+
+    <p><a href="{% url 'home' %}">Back to user list</a></p>
+</body>
+</html>
