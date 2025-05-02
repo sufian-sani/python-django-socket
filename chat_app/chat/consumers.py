@@ -9,6 +9,7 @@ from asgiref.sync import sync_to_async
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
+        breakpoint()
         user1 = self.scope['user'].username 
         user2 = self.room_name
         self.room_group_name = f"chat_{''.join(sorted([user1, user2]))}"

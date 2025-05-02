@@ -5,15 +5,16 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        self.user = self.scope['user']
         self.other_username = self.scope['url_route']['kwargs']['username']
-        self.room_group_name = f'chat_{self.scope["user"].username}_{self.other_username}'
 
-        # Join room group
+        usernames = sorted([self.user.username, self.other_username])
+        self.room_group_name = f'chat_{"_".join(usernames)}'
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
-
         await self.accept()
 
     async def disconnect(self, close_code):
